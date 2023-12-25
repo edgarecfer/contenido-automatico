@@ -12,6 +12,8 @@ import AVKit
 class MainCell: UICollectionViewCell {
     
     
+    @IBOutlet weak var mainContainer: UIView!
+    @IBOutlet weak var containerImage: UIView!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var videoView: UIView!
@@ -19,12 +21,18 @@ class MainCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        configureImagePortrait()
+        configureMainConteiner()
+    }
+    
+    private func configureMainConteiner() {
+        mainContainer.layer.cornerRadius = 20
     }
     
     func configureView(name: String, image: String, url: String) {
         nameLbl.text = name
         self.image.sd_setImage(with: URL(string: image), placeholderImage: UIImage(systemName: "photo.fill"))
-        videplay(urlString: url)
+//        videplay(urlString: url)
     }
     
     func videplay(urlString: String) {
@@ -34,6 +42,15 @@ class MainCell: UICollectionViewCell {
         playerLayer.frame = self.videoView.bounds
         self.videoView.layer.addSublayer(playerLayer)
         player.play()
+    }
+    
+    private func configureImagePortrait() {
+        containerImage.backgroundColor = .white
+        containerImage.layer.cornerRadius = 25
+        //Configure ImageView
+        image.clipsToBounds = true
+        image.contentMode = .scaleAspectFill
+        image.layer.cornerRadius = 25
     }
     
 }

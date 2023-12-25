@@ -43,7 +43,8 @@ class MainReel: UIViewController {
     }
     
 }
-extension MainReel: UICollectionViewDelegate, UICollectionViewDataSource {
+extension MainReel: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return listPhotographer?.videos?.count ?? 0
     }
@@ -58,5 +59,9 @@ extension MainReel: UICollectionViewDelegate, UICollectionViewDataSource {
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let sizeScreen = UIScreen.main.bounds
+        let widthScreen = sizeScreen.width
+        return CGSize(width: widthScreen, height: 600)
+    }
 }

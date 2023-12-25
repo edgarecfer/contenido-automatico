@@ -26,15 +26,18 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3f8-Z2-i81">
                                         <rect key="frame" x="16" y="5" width="50" height="50"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="photo.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ded-HP-V7h">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ded-HP-V7h">
                                                 <rect key="frame" x="0.0" y="1.6666666666666643" width="50" height="47"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="MAx-VR-Ebo"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ded-HP-V7h" secondAttribute="trailing" id="SUe-l2-IfU"/>
+                                            <constraint firstItem="Ded-HP-V7h" firstAttribute="leading" secondItem="3f8-Z2-i81" secondAttribute="leading" id="Tz3-be-KfL"/>
+                                            <constraint firstItem="Ded-HP-V7h" firstAttribute="top" secondItem="3f8-Z2-i81" secondAttribute="top" id="dl7-7o-Ga3"/>
                                             <constraint firstAttribute="width" constant="50" id="v5D-CU-PjU"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ded-HP-V7h" secondAttribute="bottom" id="zpu-GJ-ccV"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cargando.." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JnO-9h-wdU">
@@ -55,10 +58,10 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WEq-bn-DKm">
                                 <rect key="frame" x="0.0" y="60" width="250" height="540"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <color key="backgroundColor" red="0.90588235289999997" green="0.92941176469999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="WEq-bn-DKm" firstAttribute="top" secondItem="fEs-QA-eL2" secondAttribute="bottom" id="30a-dt-l5A"/>
                             <constraint firstAttribute="bottom" secondItem="WEq-bn-DKm" secondAttribute="bottom" id="AMR-IH-DxY"/>
@@ -71,6 +74,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="nGZ-I6-15o" firstAttribute="leading" secondItem="2aV-3s-GAs" secondAttribute="leading" id="34t-gK-XJd"/>
                     <constraint firstItem="nGZ-I6-15o" firstAttribute="top" secondItem="2aV-3s-GAs" secondAttribute="top" id="HKg-2T-HlX"/>
@@ -80,7 +84,9 @@
             </collectionViewCellContentView>
             <size key="customSize" width="250" height="600"/>
             <connections>
+                <outlet property="containerImage" destination="3f8-Z2-i81" id="m2P-gI-L7i"/>
                 <outlet property="image" destination="Ded-HP-V7h" id="uIz-6V-Ppw"/>
+                <outlet property="mainContainer" destination="nGZ-I6-15o" id="SjA-Pv-8gY"/>
                 <outlet property="nameLbl" destination="JnO-9h-wdU" id="5I6-L1-Gb1"/>
                 <outlet property="videoView" destination="WEq-bn-DKm" id="Ze9-Tr-1GL"/>
             </connections>
@@ -89,11 +95,8 @@
     </objects>
     <resources>
         <image name="photo.fill" catalog="system" width="128" height="93"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
