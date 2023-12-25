@@ -9,10 +9,11 @@ import Foundation
 
 final class ListPhotosAPIClients {
     
-    func getListPhotos() {
-        var urlBuilder = URLComponents(string: "https://api.pexels.com/v1/search")
+    func getListPhotos(onSuccess: @escaping(_ listPhoto: SearchPhotosModel) -> Void, onFailure: @escaping(_ error: Error) -> Void) {
+        var urlBuilder = URLComponents(string: "https://api.pexels.com/videos/search")
         urlBuilder?.queryItems = [
-            URLQueryItem(name: "query", value: "nature")
+            URLQueryItem(name: "query", value: "nature"),
+            URLQueryItem(name: "per_page", value: "20")
         ]
         
         guard let url = urlBuilder?.url else { return }
@@ -24,12 +25,12 @@ final class ListPhotosAPIClients {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             do {
                 let products = try JSONDecoder().decode(SearchPhotosModel.self, from: data ?? Data())
-                print("Datos")
-                print(products)
+                onSuccess(products)
             }
             catch {
                 print("Error al decodificar")
                 print(error)
+                onFailure(error)
             }
         }.resume()
     }

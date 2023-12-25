@@ -11,46 +11,48 @@ struct SearchPhotosModel: Codable {
     var total_results: Int?
     var page: Int?
     var per_page: Int?
-    var photos: [SearchPhotos]?
+    var videos: [SearchPhotos]?
     
     enum CodingKeys: CodingKey {
         case total_results
         case page
         case per_page
-        case photos
+        case videos
     }
 }
 
 struct SearchPhotos: Codable {
     var id: Int?
-    var photographer: String?
-    var src: Src?
+    var image: String?
+    var user: User?
+    var video_files: [Video]?
     
     enum CodingKeys: CodingKey {
         case id
-        case photographer
-        case src
+        case image
+        case user
+        case video_files
     }
 }
 
-struct Src: Codable {
-    var original: String?
-    var large2x: String?
-    var large: String?
-    var medium: String?
-    var small: String?
-    var portrait: String?
-    var landscape: String?
-    var tiny: String?
+struct User: Codable {
+    var id: Int?
+    var name: String?
     
     enum CodingKeys: CodingKey {
-        case original
-        case large2x
-        case large
-        case medium
-        case small
-        case portrait
-        case landscape
-        case tiny
+        case id
+        case name
+    }
+}
+
+struct Video: Codable {
+    var id: Int?
+    var quality: String?
+    var link: String?
+    
+    enum CodingKeys: CodingKey {
+        case id
+        case quality
+        case link
     }
 }
