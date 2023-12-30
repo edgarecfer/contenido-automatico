@@ -3,7 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -58,14 +57,13 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WEq-bn-DKm">
                                 <rect key="frame" x="0.0" y="60" width="250" height="540"/>
-                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.90588235289999997" green="0.92941176469999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="WEq-bn-DKm" firstAttribute="top" secondItem="fEs-QA-eL2" secondAttribute="bottom" id="30a-dt-l5A"/>
                             <constraint firstAttribute="bottom" secondItem="WEq-bn-DKm" secondAttribute="bottom" id="AMR-IH-DxY"/>
-                            <constraint firstAttribute="height" constant="600" id="Q3t-c2-GOa"/>
                             <constraint firstItem="WEq-bn-DKm" firstAttribute="leading" secondItem="nGZ-I6-15o" secondAttribute="leading" id="QcO-ek-lOS"/>
                             <constraint firstAttribute="trailing" secondItem="fEs-QA-eL2" secondAttribute="trailing" id="W4a-8e-Gpa"/>
                             <constraint firstAttribute="trailing" secondItem="WEq-bn-DKm" secondAttribute="trailing" id="i6z-xf-W8e"/>
@@ -95,8 +93,5 @@
     </objects>
     <resources>
         <image name="photo.fill" catalog="system" width="128" height="93"/>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>

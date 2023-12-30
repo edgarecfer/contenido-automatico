@@ -18,6 +18,9 @@ class MainCell: UICollectionViewCell {
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var videoView: UIView!
     
+    var playerLayer = AVPlayerLayer()
+    var player = AVPlayer()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,20 +28,25 @@ class MainCell: UICollectionViewCell {
         configureMainConteiner()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        playerLayer.removeFromSuperlayer()
+        player.pause()
+    }
+    
     private func configureMainConteiner() {
         mainContainer.layer.cornerRadius = 20
     }
     
-    func configureView(name: String, image: String, url: String) {
+    func configureView(name: String, image: String) {
         nameLbl.text = name
         self.image.sd_setImage(with: URL(string: image), placeholderImage: UIImage(systemName: "photo.fill"))
-//        videplay(urlString: url)
     }
     
-    func videplay(urlString: String) {
+    func videoPlay(urlString: String) {
         let videoURL = URL(string: urlString)
-        let player = AVPlayer(url: videoURL!)
-        let playerLayer = AVPlayerLayer(player: player)
+        player = AVPlayer(url: videoURL!)
+        playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = self.videoView.bounds
         self.videoView.layer.addSublayer(playerLayer)
         player.play()

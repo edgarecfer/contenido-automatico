@@ -54,14 +54,66 @@ extension MainReel: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         
         let name = listPhotographer?.videos?[indexPath.row].user?.name ?? "ND"
         let image = listPhotographer?.videos?[indexPath.row].image ?? "ND"
-        let url = listPhotographer?.videos?[indexPath.row].video_files?.first?.link ?? "ND"
-        cell.configureView(name: name, image: image, url: url)
+        let _ = listPhotographer?.videos?[indexPath.row].video_files?.first?.link ?? "ND"
+        cell.configureView(name: name, image: image)
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let sizeScreen = UIScreen.main.bounds
         let widthScreen = sizeScreen.width
-        return CGSize(width: widthScreen, height: 600)
+        let heightScreen = sizeScreen.height
+        return CGSize(width: widthScreen, height: heightScreen)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let url = listPhotographer?.videos?[indexPath.row].video_files?.first?.link ?? "ND"
+        (cell as? MainCell)?.videoPlay(urlString: url)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        (cell as? MainCell)?.player.pause()
+    }
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        
+//        let collectionView = scrollView as! UICollectionView
+//        let centerPoint = CGPoint(x: UIScreen.main.bounds.minX, y: scrollView.frame.minY)
+//        
+//        print("Centro de la pantalla: \(centerPoint)")
+        
+//        let pageHeight = scrollView.frame.size.height / 2
+//        if scrollView.contentOffset.y > pageHeight  {
+//            print("Contenido subiendo")
+//        } else {
+//            print("Contenido bajando")
+//        }
+//    }
+    
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        let collectionView = scrollView as! UICollectionView
+//        
+//        let centerPoint = CGPoint(x: UIScreen.main.bounds.midX, y: scrollView.frame.midY)
+//        let indexPath = collectionView.indexPathForItem(at: centerPoint)
+//        let centerCell = collectionView.cellForItem(at: indexPath!) as! MainCell
+//        let nameDisplay = centerCell.nameLbl.text
+//        print("Nombre: \(nameDisplay ?? "ND")")
+//    }
+    
+//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        
+//        let pageHeight = scrollView.frame.size.height / 2
+//        print("Media de la pantalla: \(pageHeight)")
+//        
+//        if scrollView.contentOffset.y > pageHeight  {
+//            print("Contenido subiendo")
+//        } else {
+//            print("Contenido bajando")
+//        }
+//        if(scrollView.contentOffset.x >= (scrollView.contentSize.width - pageWidth) && velocity.x > 0){
+//         shouldShowFirstCarrouselElement = true
+//         }
+//        
+//    }
 }
