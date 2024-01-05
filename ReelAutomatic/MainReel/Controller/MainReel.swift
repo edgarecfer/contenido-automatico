@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVKit
 
 class MainReel: UIViewController {
     
@@ -14,6 +15,7 @@ class MainReel: UIViewController {
     
     var api = ListPhotosAPIClients()
     var listPhotographer : SearchPhotosModel?
+    var streamController = AVPlayerViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +65,8 @@ extension MainReel: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let sizeScreen = UIScreen.main.bounds
         let widthScreen = sizeScreen.width
-        let heightScreen = sizeScreen.height
+        let heightScreen = sizeScreen.height * 0.50
+        
         return CGSize(width: widthScreen, height: heightScreen)
     }
     
@@ -74,6 +77,17 @@ extension MainReel: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         (cell as? MainCell)?.player.pause()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let url = listPhotographer?.videos?[indexPath.row].video_files?.first?.link ?? "ND"
+        let streamplayer = AVPlayer(url: URL(string: url)!)
+        streamController.player = streamplayer
+        
+        self.present(self.streamController, animated: true, completion: {
+            self.streamController.player?.play()
+        })
     }
     
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
