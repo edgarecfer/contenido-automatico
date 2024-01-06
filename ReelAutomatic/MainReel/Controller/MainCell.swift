@@ -20,6 +20,7 @@ class MainCell: UICollectionViewCell {
     
     var playerLayer = AVPlayerLayer()
     var player = AVPlayer()
+    var urlString = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,13 +39,14 @@ class MainCell: UICollectionViewCell {
         mainContainer.layer.cornerRadius = 20
     }
     
-    func configureView(name: String, image: String) {
+    func configureView(name: String, image: String, url: String) {
+        self.urlString = url
         nameLbl.text = name
         self.image.sd_setImage(with: URL(string: image), placeholderImage: UIImage(systemName: "photo.fill"))
     }
     
-    func videoPlay(urlString: String) {
-        let videoURL = URL(string: urlString)
+    func videoPlay() {
+        let videoURL = URL(string: self.urlString)
         player = AVPlayer(url: videoURL!)
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = self.videoView.bounds

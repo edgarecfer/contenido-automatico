@@ -56,29 +56,13 @@ extension MainReel: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         
         let name = listPhotographer?.videos?[indexPath.row].user?.name ?? "ND"
         let image = listPhotographer?.videos?[indexPath.row].image ?? "ND"
-        let _ = listPhotographer?.videos?[indexPath.row].video_files?.first?.link ?? "ND"
-        cell.configureView(name: name, image: image)
+        let url = listPhotographer?.videos?[indexPath.row].video_files?.first?.link ?? "ND"
+        cell.configureView(name: name, image: image, url: url)
         
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let sizeScreen = UIScreen.main.bounds
-        let widthScreen = sizeScreen.width
-        let heightScreen = sizeScreen.height * 0.50
-        
-        return CGSize(width: widthScreen, height: heightScreen)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let url = listPhotographer?.videos?[indexPath.row].video_files?.first?.link ?? "ND"
-        (cell as? MainCell)?.videoPlay(urlString: url)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        (cell as? MainCell)?.player.pause()
-    }
-    
+    //MARK: dejar este metodo para cuando se selecciona el item a reproducir
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let url = listPhotographer?.videos?[indexPath.row].video_files?.first?.link ?? "ND"
@@ -89,6 +73,53 @@ extension MainReel: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             self.streamController.player?.play()
         })
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let sizeScreen = UIScreen.main.bounds
+        let widthScreen = sizeScreen.width
+        let heightScreen = sizeScreen.height * 0.50
+        
+        return CGSize(width: widthScreen, height: heightScreen)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let visibleCell = self.mainContainer.indexPathsForVisibleItems.sorted { top, bottom -> Bool in
+            return top.section < bottom.section || top.row < bottom.row
+        }.compactMap { indexPath -> UICollectionViewCell? in
+            return self.mainContainer.cellForItem(at: indexPath)
+        }
+        
+        let indexPaths = self.mainContainer.indexPathsForVisibleItems.sorted()
+        let cellCount = visibleCell.count
+        guard let firstCell = visibleCell.first as? MainCell, let firstIndex = indexPaths.first else {return}
+        checkVisibilityOfCell(cell: firstCell, indexPath: firstIndex)
+        if cellCount == 1 {return}
+        guard let lastCell = visibleCell.last as? MainCell, let lastIndex = indexPaths.last else {return}
+        checkVisibilityOfCell(cell: lastCell, indexPath: lastIndex)
+    }
+    
+    func checkVisibilityOfCell(cell: MainCell,indexPath: IndexPath) {
+        if let cellRect = (mainContainer.layoutAttributesForItem(at: indexPath)?.frame) {
+            let completelyVisible = mainContainer.bounds.contains(cellRect)
+            if completelyVisible{
+//                cell.videoPlay(urlString: "https://player.vimeo.com/external/384761655.sd.mp4?s=383ab4dbc773cd0d5ece3af208d8f963368f67e4&profile_id=165&oauth2_token_id=57447761")
+                cell.videoPlay()
+            } else {
+                cell.player.pause()
+            }
+        }
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        let url = listPhotographer?.videos?[indexPath.row].video_files?.first?.link ?? "ND"
+//        (cell as? MainCell)?.videoPlay(urlString: url)
+//    }
+    
+//    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        (cell as? MainCell)?.player.pause()
+//    }
+    
+    
     
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        
