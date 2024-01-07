@@ -32,7 +32,6 @@ class MainCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         playerLayer.removeFromSuperlayer()
-        player.pause()
     }
     
     private func configureMainConteiner() {
@@ -48,10 +47,15 @@ class MainCell: UICollectionViewCell {
     func videoPlay() {
         let videoURL = URL(string: self.urlString)
         player = AVPlayer(url: videoURL!)
+        player.playImmediately(atRate: 1)
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = self.videoView.bounds
         self.videoView.layer.addSublayer(playerLayer)
         player.play()
+    }
+    
+    func stopVideo() {
+        player.pause()
     }
     
     private func configureImagePortrait() {

@@ -62,7 +62,6 @@ extension MainReel: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return cell
     }
     
-    //MARK: dejar este metodo para cuando se selecciona el item a reproducir
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let url = listPhotographer?.videos?[indexPath.row].video_files?.first?.link ?? "ND"
@@ -102,10 +101,9 @@ extension MainReel: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         if let cellRect = (mainContainer.layoutAttributesForItem(at: indexPath)?.frame) {
             let completelyVisible = mainContainer.bounds.contains(cellRect)
             if completelyVisible{
-//                cell.videoPlay(urlString: "https://player.vimeo.com/external/384761655.sd.mp4?s=383ab4dbc773cd0d5ece3af208d8f963368f67e4&profile_id=165&oauth2_token_id=57447761")
                 cell.videoPlay()
             } else {
-                cell.player.pause()
+                cell.stopVideo()
             }
         }
     }
