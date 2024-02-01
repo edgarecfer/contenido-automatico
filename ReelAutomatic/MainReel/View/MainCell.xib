@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -57,7 +57,28 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WEq-bn-DKm">
                                 <rect key="frame" x="0.0" y="59.999999999999972" width="250" height="420.33333333333326"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BEe-JV-oTP">
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="420.33333333333331"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Jf4-j1-EOf">
+                                        <rect key="frame" x="100" y="186.33333333333334" width="50" height="48.666666666666657"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="NK7-Gk-Wke"/>
+                                            <constraint firstAttribute="width" constant="50" id="Uya-sG-n5G"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="BEe-JV-oTP" secondAttribute="bottom" id="D79-DO-4wI"/>
+                                    <constraint firstAttribute="trailing" secondItem="BEe-JV-oTP" secondAttribute="trailing" id="EfO-D3-fLx"/>
+                                    <constraint firstItem="BEe-JV-oTP" firstAttribute="leading" secondItem="WEq-bn-DKm" secondAttribute="leading" id="Ldz-vl-a9K"/>
+                                    <constraint firstItem="Jf4-j1-EOf" firstAttribute="centerY" secondItem="WEq-bn-DKm" secondAttribute="centerY" id="R97-gP-9Gk"/>
+                                    <constraint firstItem="BEe-JV-oTP" firstAttribute="top" secondItem="WEq-bn-DKm" secondAttribute="top" id="ffD-pI-IRc"/>
+                                    <constraint firstItem="Jf4-j1-EOf" firstAttribute="centerX" secondItem="WEq-bn-DKm" secondAttribute="centerX" id="ptU-EV-tPP"/>
+                                </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ijz-jA-aYo">
                                 <rect key="frame" x="16" y="496.33333333333331" width="218" height="87.666666666666686"/>
@@ -106,12 +127,14 @@
                 <outlet property="image" destination="Ded-HP-V7h" id="uIz-6V-Ppw"/>
                 <outlet property="mainContainer" destination="nGZ-I6-15o" id="SjA-Pv-8gY"/>
                 <outlet property="nameLbl" destination="JnO-9h-wdU" id="5I6-L1-Gb1"/>
-                <outlet property="videoView" destination="WEq-bn-DKm" id="Ze9-Tr-1GL"/>
+                <outlet property="playIcon" destination="Jf4-j1-EOf" id="k15-4R-YTP"/>
+                <outlet property="videoView" destination="BEe-JV-oTP" id="JFi-JW-KhF"/>
             </connections>
             <point key="canvasLocation" x="647.32824427480909" y="78.16901408450704"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="photo.fill" catalog="system" width="128" height="93"/>
+        <image name="play.circle.fill" catalog="system" width="128" height="123"/>
     </resources>
 </document>

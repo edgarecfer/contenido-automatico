@@ -15,6 +15,7 @@ class MainCell: UICollectionViewCell {
     @IBOutlet weak var mainContainer: UIView!
     @IBOutlet weak var containerImage: UIView!
     @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var playIcon: UIImageView!
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var videoView: UIView!
     
@@ -31,10 +32,12 @@ class MainCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.videoView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         playerLayer.removeFromSuperlayer()
     }
     
     private func configureMainConteiner() {
+        playIcon.tintColor = UIColor.white
         mainContainer.layer.cornerRadius = 20
     }
     
@@ -45,16 +48,20 @@ class MainCell: UICollectionViewCell {
     }
     
     func videoPlay() {
+        playIcon.isHidden = true
+        
         let videoURL = URL(string: self.urlString)
         player = AVPlayer(url: videoURL!)
-        player.playImmediately(atRate: 1)
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = self.videoView.bounds
+        playerLayer.videoGravity = .resizeAspectFill
         self.videoView.layer.addSublayer(playerLayer)
         player.play()
     }
     
     func stopVideo() {
+        playIcon.isHidden = false
+        
         player.pause()
     }
     
