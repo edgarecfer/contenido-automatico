@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol MainCellTableDelegate:AnyObject {
+    func goToPresentVideo(url: String)
+}
+
 class MainCellTable: UITableViewCell {
     
     @IBOutlet weak var mainView: UIView!
@@ -17,6 +21,7 @@ class MainCellTable: UITableViewCell {
     @IBOutlet weak var pageControl: UIPageControl!
     
     var videos: [Video]?
+    weak var delegate: MainCellTableDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -79,6 +84,7 @@ extension MainCellTable: UICollectionViewDelegate, UICollectionViewDataSource,  
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContainerCollectionCell", for: indexPath) as! ContainerCollectionCell
+        cell.delegate = self
         
         let url = videos?.first?.link ?? "ND"
         
@@ -113,5 +119,11 @@ extension MainCellTable: UICollectionViewDelegate, UICollectionViewDataSource,  
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         pageControl.currentPage = indexPath.row
+    }
+}
+
+extension MainCellTable: ContainerCollectionCellDelgate {
+    func goToVideo(url: String) {
+        self.delegate?.goToPresentVideo(url: url)
     }
 }

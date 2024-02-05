@@ -52,6 +52,7 @@ extension MainView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainCellTable", for: indexPath) as! MainCellTable
+        cell.delegate = self
         
         let image = listPhotographer?.videos?[indexPath.row].image ?? "ND"
         let name = listPhotographer?.videos?[indexPath.row].user?.name ?? "ND"
@@ -67,5 +68,16 @@ extension MainView: UITableViewDelegate, UITableViewDataSource {
         let heightScreen = sizeScreen.height * 0.50
         
         return heightScreen
+    }
+}
+
+extension MainView: MainCellTableDelegate {
+    func goToPresentVideo(url: String) {
+        let url = url
+        let streamplayer = AVPlayer(url: URL(string: url)!)
+        streamController.player = streamplayer
+        self.present(self.streamController, animated: true, completion: {
+            self.streamController.player?.play()
+        })
     }
 }
